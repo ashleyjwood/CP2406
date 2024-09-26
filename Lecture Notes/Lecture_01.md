@@ -1,5 +1,30 @@
-# Week 1
+<div style='text-align: justify;'>
 
+<!-- TOC -->
+* [Week 1](#week-1)
+  * [Ch01Pt01 - Intro](#ch01pt01---intro)
+  * [Ch01Pt2 - Namespaces, Literals, and Casting](#ch01pt2---namespaces-literals-and-casting)
+    * [Namespaces](#namespaces)
+    * [Literals](#literals)
+    * [Casting](#casting)
+  * [Ch01Pt03 - Operators](#ch01pt03---operators)
+    * [Basic operators](#basic-operators)
+    * [Enumeration](#enumeration)
+    * [Structs](#structs)
+      * [Struct example](#struct-example)
+  * [Ch01Pt04 - Basic loops, The Conditional Operator, and arrays](#ch01pt04---basic-loops-the-conditional-operator-and-arrays)
+    * [If/else statements](#ifelse-statements)
+    * [Switch cases](#switch-cases)
+      * [Switch case example](#switch-case-example)
+      * [Converting a switch case to an if/else statement](#converting-a-switch-case-to-an-ifelse-statement)
+    * [The Conditional Operator](#the-conditional-operator)
+    * [Logical evaluation operators](#logical-evaluation-operators)
+    * [Function](#function)
+      * [Function overloading](#function-overloading)
+    * [Arrays](#arrays)
+<!-- TOC -->
+
+# Week 1
 ## Ch01Pt01 - Intro
 
 No notes taken. Very basic intro.
@@ -41,7 +66,7 @@ Some other literals include:
 - Double: `3.14` (or `double 3.14`)
 	- Uses 8 bytes of memory
 - Single characters: `a`
-	- Uses 1 bytes of memory
+	- Uses 1 byte of memory
 
 Digit separators can be used in numeric literals (for better readability) and is denoted as a **single quote**, e.g.:
 `23'456'789`
@@ -104,7 +129,7 @@ The following are all operators:
 
 - `=`, `!` and `!=`, `+` and `-`, `*` and `/`, `%`, `+=` and `-=`, `*=` and `/=`, and `%=`. These are all standard and
   already understood.
-- `++` is an unary operator to increment an expression by 1.
+- `++` is a unary operator to increment an expression by 1.
 	- If the operator occurs _after_ the expression, the result of the expression is the **un-incremented** value
 	- If the operator occurs _before_ the expression, the result of the expression is the **pre-incremented** value
 - `--` is the unary operator to decrement an expression by 1.
@@ -147,45 +172,53 @@ _enumerations._
 ### Structs
 
 "It's pretty much identical to say 'class something'. You could say that a struct is a class without functions and
-without methods. It is a collection of variables."
-A struct contains all of the information included in the `module_name.cppm`, where `.cppm` denotes a _module interface_.
+without methods. It is a collection of variables."  
+In traditional C++, structs are declared in header files (.h or .hpp) and defined in source files (.cpp). Struct members
+are public by default, unlike class members, which are private by default.
 
 #### Struct example
 
-```
-export module employee;  
+You can declare a struct in a header file (employee.h):
 
-export struct Employee {
+```
+// employee.h
+#ifndef EMPLOYEE_H
+#define EMPLOYEE_H
+
+struct Employee {
     char first_initial;
     char last_initial;
     int employee_number;
     int salary;
 };
+
+#endif
 ```
 
-This struct can then be imported into another file like so:  
-Note the lack of `< >` (angle brackets).
+Then, in your source file (main.cpp), include the header and use the struct:
 
 ```
-#include <iostream>;
-#include <format>;
-#include employee;
+// main.cpp
+#include <iostream>
+#include <format>
+#include "employee.h"  // Include the employee struct definition
 
 using namespace std;
 
-int main()
-{
+int main() {
     Employee example_employee;
     example_employee.first_initial = 'J';
     example_employee.last_initial = 'D';
     example_employee.employee_number = 42;
     example_employee.salary = 80000;
-    
+
     cout << format("Employee: {}{}", example_employee.first_initial, example_employee.last_initial) << endl;
     cout << format("Number: {}", example_employee.employee_number) << endl;
     cout << format("Salary: {}", example_employee.salary) << endl;
 }
 ```
+
+## Ch01Pt04 - Basic loops, The Conditional Operator, and arrays
 
 ### If/else statements
 
@@ -241,7 +274,7 @@ else {
 
 ### The Conditional Operator
 
-C++ has one operator that takes three arguments known as the _ternary operator_. It is used as a short-hand conditional
+C++ has one operator that takes three arguments known as the _ternary operator_. It is used as a shorthand conditional
 expression of the form "if [something] then [perform action], otherwise [perform some other action]". The following code
 outputs "yes" if the variable `i` is greater than 2, and "no" otherwise:  
 `cout << ((i > 2) ? "yes" : "no");`
@@ -292,7 +325,7 @@ cout << add_numbers(1.11, 2.22) << endl;    // Calls the double version
 
 ### Arrays
 
-In arrays in C/C++, you must define the size of the array when the array is declared and it must be a constant or a
+In arrays in C/C++, you must define the size of the array when the array is declared, and it must be a constant or a
 _constant expression_ (`constexpr`). E.g.:
 
 ```
@@ -333,4 +366,4 @@ cout << format("1st element: {}", my_vector[0]) << endl;
 **A vector is a generic container which can contain almost any type of object, but all elements in a vector must be of
 the same type.**
 
-## Ch01Pt04 - If
+</div>
