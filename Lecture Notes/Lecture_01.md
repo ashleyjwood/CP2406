@@ -180,7 +180,7 @@ are public by default, unlike class members, which are private by default.
 
 You can declare a struct in a header file (employee.h):
 
-```
+```c++
 // employee.h
 #ifndef EMPLOYEE_H
 #define EMPLOYEE_H
@@ -197,7 +197,7 @@ struct Employee {
 
 Then, in your source file (main.cpp), include the header and use the struct:
 
-```
+```c++
 // main.cpp
 #include <iostream>
 #include <format>
@@ -222,7 +222,7 @@ int main() {
 
 ### If/else statements
 
-```
+```c++
 if (i > 4) 
 {
 // Do something
@@ -244,7 +244,7 @@ the value of an expression".
 
 #### Switch case example
 
-```
+```c++
 switch (menu_item) {
     case open_menu_item:
         // Code to open a file
@@ -260,7 +260,7 @@ switch (menu_item) {
 
 #### Converting a switch case to an if/else statement
 
-```
+```c++
 if (menu_item == open_menu_item) {
     // Code to open a file
     }
@@ -310,7 +310,7 @@ nonexistent code. If a function doesn't return anything, it needs to have a `voi
 
 Similar to Python. E.g.:
 
-```
+```c++
 int add_numbers(int a , int b) { return a + b; }
 double add_number(double a, double b) { return a + b; }
 ```
@@ -318,7 +318,7 @@ double add_number(double a, double b) { return a + b; }
 When calling add_numbers(), the compiler automatically selects the correct function overload based on the provided
 arguments.
 
-```
+```c++
 cout << add_numbers(1, 2) << endl;          // Calls the integer version
 cout << add_numbers(1.11, 2.22) << endl;    // Calls the double version 
 ```
@@ -328,7 +328,7 @@ cout << add_numbers(1.11, 2.22) << endl;    // Calls the double version
 In arrays in C/C++, you must define the size of the array when the array is declared, and it must be a constant or a
 _constant expression_ (`constexpr`). E.g.:
 
-```
+```c++
 int my_array[3];
 my_array[0] = 0;
 my_array[1] = 0;
@@ -351,7 +351,7 @@ A `vector` automatically allocates enough memory to hold its elements. It is als
 added and removed while the program is running (i.e., vectors are mutable whereas arrays are immutable). The following
 code demonstrates the basic functionality of a vector:
 
-```
+```c++
 // Create a vector of integers
 std::vector<int> my_vector = {11, 22};
 

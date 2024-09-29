@@ -1,42 +1,45 @@
 <div style='text-align: justify;'>
 
 <!-- TOC -->
-
 * [Week 2](#week-2)
-	* [Ch01Pt05](#ch01pt05)
-		* [Structured Bindings](#structured-bindings)
-		* [Loops](#loops)
-			* [While loop](#while-loop)
-			* [For loop](#for-loop)
-			* [Range-Based For loop](#range-based-for-loop)
-			* [Initialiser Lists](#initialiser-lists)
-		* [C++ as an Object-Oriented Language](#c-as-an-object-oriented-language)
-			* [Scope](#scope)
-			* [Uniform Initialisation](#uniform-initialisation)
-	* [Ch01Pt06](#ch01pt06)
-		* [Pointers and Dynamic Memory](#pointers-and-dynamic-memory)
-		* [Working with Pointers](#working-with-pointers)
-		* [Dynamically Allocated Arrays](#dynamically-allocated-arrays)
-	* [Ch01Pt07](#ch01pt07)
-		* [Constants](#constants)
-			* [`const` as a Qualifier for a Type](#const-as-a-qualifier-for-a-type)
-			* [`const` with Pointers](#const-with-pointers)
-			* [`const` to Protect Parameters](#const-to-protect-parameters)
-			* [`const` Methods](#const-methods)
-			* [The `constexpr` Keyword](#the-constexpr-keyword)
-		* [References](#references)
-			* [Reference-to-`const`](#reference-to-const)
-	* [Ch01Pt08](#ch01pt08)
-		* [Structure Bindings and References](#structure-bindings-and-references)
-		* [Reference Data Members](#reference-data-members)
-		* [Reference Parameters](#reference-parameters)
-			* [Using an output parameter](#using-an-output-parameter)
-			* [Returning a value](#returning-a-value)
-		* [Pass-by-reference-to-`const`](#pass-by-reference-to-const)
-		* [Pass-by-Reference vs. Pass-by-Value](#pass-by-reference-vs-pass-by-value)
-		* [Reference Return Values](#reference-return-values)
-		* [Deciding Between References and Pointers](#deciding-between-references-and-pointers)
-
+  * [Ch01Pt05](#ch01pt05)
+    * [Structured Bindings](#structured-bindings)
+    * [Loops](#loops)
+      * [While loop](#while-loop)
+      * [For loop](#for-loop)
+      * [Range-Based For loop](#range-based-for-loop)
+      * [Initialiser Lists](#initialiser-lists)
+    * [C++ as an Object-Oriented Language](#c-as-an-object-oriented-language)
+      * [Scope](#scope)
+      * [Uniform Initialisation](#uniform-initialisation)
+  * [Ch01Pt06](#ch01pt06)
+    * [Pointers and Dynamic Memory](#pointers-and-dynamic-memory)
+    * [Working with Pointers](#working-with-pointers)
+    * [Dynamically Allocated Arrays](#dynamically-allocated-arrays)
+  * [Ch01Pt07](#ch01pt07)
+    * [Constants](#constants)
+      * [`const` as a Qualifier for a Type](#const-as-a-qualifier-for-a-type)
+      * [`const` with Pointers](#const-with-pointers)
+      * [`const` to Protect Parameters](#const-to-protect-parameters)
+      * [`const` Methods](#const-methods)
+      * [The `constexpr` Keyword](#the-constexpr-keyword)
+    * [References](#references)
+      * [Reference-to-`const`](#reference-to-const)
+  * [Ch01Pt08](#ch01pt08)
+    * [Structure Bindings and References](#structure-bindings-and-references)
+    * [Reference Data Members](#reference-data-members)
+    * [Reference Parameters](#reference-parameters)
+      * [Using an output parameter](#using-an-output-parameter)
+      * [Returning a value](#returning-a-value)
+    * [Pass-by-reference-to-`const`](#pass-by-reference-to-const)
+    * [Pass-by-Reference vs. Pass-by-Value](#pass-by-reference-vs-pass-by-value)
+    * [Reference Return Values](#reference-return-values)
+    * [Deciding Between References and Pointers](#deciding-between-references-and-pointers)
+  * [Ch01Pt09](#ch01pt09)
+    * [Exceptions](#exceptions)
+    * [Typedefs](#typedefs)
+    * [Type Inference](#type-inference)
+      * [The `auto` Keyword](#the-auto-keyword)
 <!-- TOC -->
 
 # Week 2
@@ -49,7 +52,7 @@ Structured bindings allow you to declare multiple variables that are initialised
 `array`, `struct`, or `pair`.
 Example:
 
-```
+```c++
 array values { 11, 22, 33 };
 auto [x, y, z] { values };
 ```
@@ -63,7 +66,7 @@ NOTE:
 
 Example of Structured Bindings with a struct:
 
-```
+```c++
 struct Point { double m_x, m_y, m_z; };
 Point point;
 point.m_x = 1.0; point.m_y = 2.0; point.m_z = 3.0;
@@ -94,7 +97,7 @@ number of arguments**. The `std::initializer_list` type is a class template, and
 of elements in the list between angle brackets, similar to how you specify the type of object stored in a `vector`.
 The following example shows how to use an initialiser list:
 
-```
+```c++
 #include <initializer_list>
 #include <iostream>
 
@@ -120,7 +123,7 @@ and can be repeated. Members that are `public` can be accessed from outside the 
 cannot. **It is recommended to make all your data members `private`** and only give access to them with `public` or
 `protected` getters and setters (discussed later on).
 
-```
+```c++
 #include <string>
 
 class AirlineTicket {
@@ -153,7 +156,7 @@ it is automatically called when the object is destroyed.
 There are several ways to initialise data members of a class. One way is to put the initialisations in the body of the
 constructor, as shown below:
 
-```
+```c++
 AirlineTicket::AirlineTicket()
 {
     // Initialize data members.
@@ -169,7 +172,7 @@ _in-class initialisers_. For example, instead of writing an `AirlineTicket` cons
 in
 the class definition to initialise them as follows:
 
-```
+```c++
 private:
 	std::string passenger_name { "Unknown Passenger" };
 	int number_of_miles { 0 };
@@ -196,7 +199,7 @@ disambiguate which function to call.
 
 Example:
 
-```
+```c++
 class Demo {
     public:
         int get() { return 5; }
@@ -222,7 +225,7 @@ int main() {
 **It is recommended to always use uniform initialisation in C++.**  
 In the section "structs" earlier, an `Employee` structure is initialised as follows:
 
-```
+```c++
 Employee an_employee;
 an_employee.first_initial = 'J';
 an_employee.last_initial = 'D';
@@ -239,7 +242,7 @@ The definition of `an_employee` automatically calls the constructor of `Employee
 Uniform initialisation **is not limited** to structures and classes. You can use it to initialise almost anything in
 C++. For example, the following code initialised all four variables with value 3:
 
-```
+```c++
 int a = 3;
 int b(3);
 int c = { 3 };  // Uniform initialization
@@ -311,7 +314,7 @@ After you are finished with your dynamically allocated memory, you need to deall
 operator. To prevent the pointer from being used after having deallocated the memory it points to, it's recommended to
 set it to `nullptr`:
 
-```
+```c++
 delete my_integer_pointer;
 my_integer_pointer = nullptr;
 ```
@@ -322,7 +325,7 @@ causes undefined behaviour. Your program may crash, or it may keep running and s
 Pointers don't always need to point to free store memory. You can declare a pointer that points to a variable on the
 stack, or even another pointer. To get a pointer to a variable, you used the `&` ("address of") operator:
 
-```
+```c++
 int i { & };
 int* my_integer_pointer { &i };  // Points to the variable with the value 8 from above
 ```
@@ -331,7 +334,7 @@ C++ has a special syntax for dealing with pointers to structures or classes. Tec
 structure or a class, you can access its fields by first dereferencing it with `*`, and then using the normal `.`
 syntax. For example:
 
-```
+```c++
 Employee* an_employee { get_employee() };
 std::cout << (*an_employee).salary << std::endl; 
 ```
@@ -339,7 +342,7 @@ std::cout << (*an_employee).salary << std::endl;
 However, this is messy. The -> (arrow) operator lets you perform both the dereference and the field access in one step.
 The following code is equivalent, but is easier to read:
 
-```
+```c++
 Employee* an_employee { get_employee() };
 cout << an_employee->salary << endl;
 ```
@@ -349,7 +352,7 @@ cout << an_employee->salary << endl;
 The free store can also be used to dynamically allocate arrays. You use the `new[]` operator to allocate memory for an
 array.
 
-```
+```c++
 int array_size { 8 };
 int* my_variable_sized_array { new int[array_size] };
 ```
@@ -360,7 +363,7 @@ work with `my_variable_size_array` as though it were a regular stack-based array
 When your code is done with the array, it should remove the array from the free store so that other variables can use
 the memory. In order to do this, you use the `delete[]` operator:
 
-```
+```c++
 delete[] my_variable_size_array;
 my_variable_size_array = nullptr;
 ```
@@ -427,7 +430,7 @@ array needs to be a constant expression. Using the `constexpr` keyword, a functi
 called from within a constant expression.  
 Example:
 
-```
+```c++
 constexpr int get_array_size() { return 32; }
 
 int main()
@@ -449,7 +452,7 @@ variable to which it refers, it is really a pointer to the original variable. If
 of them, the change is visible through the other one as well. **Reference variables must be initialised as soon as they
 are created**, like this:
 
-```
+```c++
 int x { 3 };
 int& x_ref { x };
 ```  
@@ -471,7 +474,7 @@ Things to note:
 Examples:
 The following will compile, as the variable `z` is what is being changed, which in turn changes the value of z_ref.
 
-```
+```c++
 int z;
 const int& z_ref { z };
 z = 4;  // DOES COMPILE
@@ -479,7 +482,7 @@ z = 4;  // DOES COMPILE
 
 However, the following will **not** compile, as it is trying to change the value of the reference directly;
 
-```
+```c++
 int z;
 const int& z_ref { z };
 z_ref = 4;  // DOES NOT COMPILE
@@ -488,7 +491,7 @@ z_ref = 4;  // DOES NOT COMPILE
 You cannot create a reference to an unnamed value, such as an integer literal, unless the reference is to a `const`
 value. Example:
 
-```
+```c++
 int& unnamed_ref_1 { 5 };       // DOES NOT COMPILE
 const int& unnamed_ref_2 { 5 }; // Works as expected
 ```
@@ -496,7 +499,7 @@ const int& unnamed_ref_2 { 5 }; // Works as expected
 Taking the address of a reference gives the same result as taking the address of the variable to which the reference
 refers. Example:
 
-```
+```c++
 int x { 3 };
 int& x_ref { x };
 int* x_ptr { &x_ref };  // Address of a reference is pointer to value.
@@ -514,14 +517,14 @@ both compile without errors and are both `true`.
 
 Structured bindings were introduced earlier in the chapter. One of the examples given was the following:
 
-```
+```c++
 pair my_pair { "hello", 5 };
 auto [some_string, some_int] { my_pair };  // Decompose using structured bindings
 ```
 
 You can combine structured bindings with references and `const` variables. Example:
 
-```
+```c++
 auto& [some_string, some_int] { my_pair };          // Decompose into references-to-non-const
 const auto& [some_string, some_int] { my_pair };    // Decompose into references-to-const
 ```
@@ -532,7 +535,7 @@ Data members of classes can be references. Reference data members cannot be init
 constructor, but they must be initialised in the so-called _constructor initialiser_. That is, a constructor initialiser
 immediately follows the constructor header and starts with a colon. Example:
 
-```
+```c++
 class MyClass
 {
 	public:
@@ -563,7 +566,7 @@ pointers. The following are two implementations of an `add_one()` function. The 
 that is passed in because it is passed by value, and thus the function receives a copy of the value passed to it. The
 second one uses a reference and thus changes the original variable.
 
-```
+```c++
 void add_one(int i)
 {
 	i++; // Has no real effect because this is a copy of the original
@@ -581,7 +584,7 @@ to just return the object by value rather than using an output parameter. Exampl
 
 #### Using an output parameter
 
-```
+```c++
 class ExpensiveObject {
 public:
     ExpensiveObject() { std::cout << "ExpensiveObject created\n"; }
@@ -604,7 +607,7 @@ int main() {
 
 #### Returning a value
 
-```
+```c++
 class ExpensiveObject {
 public:
     ExpensiveObject() { std::cout << "ExpensiveObject created\n"; }
@@ -661,7 +664,7 @@ References in C++ could be considered redundant: everything you can do with refe
 pointers. Here is another example where pass-by-reference comes in handy; it’s a simple swap function to swap the values
 of two ints:
 
-```
+```c++
 void swap(int& first, int& second)
 {
     int temp { first };
@@ -672,14 +675,14 @@ void swap(int& first, int& second)
 
 You can call it like this:
 
-```
+```c++
 int x { 5 }, y { 6 };
 swap(x, y);
 ```
 
 For example, you could write the earlier shown swap() function like this:
 
-```
+```c++
 void swap(int* first, int* second)
 {
     int temp { *first };
@@ -724,7 +727,7 @@ are not entirely equivalent though.
 
 ### Type Inference
 
-Type inference allows the compiler to automatically deduce the type of an expression. There are two keywords for type
+Type inference allows the compiler to automatically deduce the type of expression. There are two keywords for type
 inference: `auto` and `decltype`.
 
 #### The `auto` Keyword
@@ -733,7 +736,7 @@ The auto keyword has a number of different uses:
 
 - Deducing a function's return type
 - Structure bindings
-- Deducing the type of an expression
+- Deducing the type of expression
 - Deducing the type of non-type template parameters
 - Abbreviated function template syntax
 - `decltype(auto)`
