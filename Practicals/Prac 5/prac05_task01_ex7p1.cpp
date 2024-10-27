@@ -1,22 +1,25 @@
 #include <cstddef>
 #include <iostream>
+#include <array>
 
 using namespace std;
 
 int main()
 {
 	const size_t numberOfElements{10};
-	int *values{new int[numberOfElements]};
+	array<int, numberOfElements> values;
 
-	for (int index{0}; index < numberOfElements; ++index)
+	for (int index{0}; index < values.size(); ++index)
 	{
 		values[index] = index;
 	}
 
-	values[9] = 99;
+	values[values.size() - 1] = 99;
 
-	for (int index{0}; index <= numberOfElements - 1; ++index)
+	cout << "Values array: ";
+	for (const auto &value : values)
 	{
-		cout << values[index] << " ";
+		cout << value << " ";
 	}
+	cout << endl;
 }
