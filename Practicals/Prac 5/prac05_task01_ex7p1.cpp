@@ -1,22 +1,21 @@
 #include <cstddef>
 #include <iostream>
 #include <array>
+#include <vector>
 
 using namespace std;
 
 int main()
 {
 	const size_t numberOfElements{10};
-	array<int, numberOfElements> values;
-
-	for (int index{0}; index < values.size(); ++index)
+	vector<int> values; 
+	for (int index{0}; index < numberOfElements; ++index)
 	{
-		values[index] = index;
+		values.push_back(index);
 	}
+	values.back() = 99;
 
-	values[values.size() - 1] = 99;
-
-	cout << "Values array: ";
+	cout << "Vector contents: ";
 	for (const auto &value : values)
 	{
 		cout << value << " ";
