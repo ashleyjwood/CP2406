@@ -1,0 +1,42 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+vendor/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Compiled files and build outputs
+*.class
+*.o
+*.so
+*.dll
+*.exe
+/dist/
+
+# IDE and Editor Settings
+.vscode/
+.idea/
+*.iml
+
+# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+~$*
+
+# Generated documentation
+/doc/
+
+# Git-specific files
+.git/
