@@ -1,47 +1,23 @@
-// #include <cstddef>
-// import <iostream>;
 #include <iostream>
+#include "Person.h"
 
 using namespace std;
 
+int main()
+{
+    Person person1("John", "Doe");
 
+    cout << "Person 1: " << person1.getFirstName() << " " << person1.getLastName() << endl;
 
-// int main()
-// {
+    person1.setFirstName("Jane");
+    person1.setLastName("Smith");
 
-// }
+    cout << "Modified Person 1: " << person1.getFirstName() << " " << person1.getLastName() << endl;
 
-// FROM page 251:
-// export module spreadsheet_cell;
+    Person *person2 = new Person("Alice", "Johnson");
 
-// export class SpreadsheetCell
-// {
-// public:
-// 	void setValue(double value);
-// 	double getValue() const;
+    // Use `->` instead of a pointer to avoid dereferencing
+    cout << "Person 2: " << person2->getFirstName() << " " << person2->getLastName() << endl;
 
-// private:
-// 	double m_value{ 0 };
-// };
-
-//export class SpreadsheetCell
-//{
-//public:
-//	void setValue(double value) { m_value = value; }
-//	double getValue() const { return m_value; }
-//private:
-//	double m_value{ 0 };
-//};
-
-// FROM: page 253
-// module spreadsheet_cell;
-// void SpreadsheetCell::setValue(double value)
-// {
-// 	m_value = value;
-// }
-
-// double SpreadsheetCell::getValue() const
-// {
-// 	return m_value;
-// }
-
+    delete person2;
+}
