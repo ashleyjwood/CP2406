@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/yelps/CP2406_projects/build",
-  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -std=gnu++23 -o CMakeFiles\\CP2406.dir\\main.cpp.obj -c C:\\Users\\yelps\\CP2406_projects\\main.cpp",
-  "file": "C:/Users/yelps/CP2406_projects/main.cpp",
-  "output": "CMakeFiles/CP2406.dir/main.cpp.obj"
-}
-]

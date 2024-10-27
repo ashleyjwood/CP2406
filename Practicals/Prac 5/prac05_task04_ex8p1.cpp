@@ -4,9 +4,12 @@
 
 using namespace std;
 
-int main()
-{
-}
+
+
+// int main()
+// {
+
+// }
 
 // FROM page 251:
 // export module spreadsheet_cell;
@@ -21,14 +24,14 @@ int main()
 // 	double m_value{ 0 };
 // };
 
-// export class SpreadsheetCell
+//export class SpreadsheetCell
 //{
-// public:
+//public:
 //	void setValue(double value) { m_value = value; }
 //	double getValue() const { return m_value; }
-// private:
+//private:
 //	double m_value{ 0 };
-// };
+//};
 
 // FROM: page 253
 // module spreadsheet_cell;
@@ -41,3 +44,4 @@ int main()
 // {
 // 	return m_value;
 // }
+
