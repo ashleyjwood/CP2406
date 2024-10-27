@@ -1,0 +1,3 @@
+I was unable to get Task 2 outputting code properly. Everything seemed to work until I entered a replacement string, when CLion would return `Process finished with exit code -1073741819 (0xC0000005)`. After debugging my code with a friend (screenshots attached in zip file), there seems to be some issue with my computer specifically? Because my code works on their computer, but not on mine; and their code works on their computer, but not on mine.
+
+Since Task 3 required Task 2, this means that I was also unable to complete Task 3.
