@@ -16,6 +16,8 @@ namespace HR
 			std::cout << "id=" << id << std::endl;
 		}
 
+		std::string toString() const override { return Person::toString() + ", Employee ID: " + std::to_string(m_id); }
+
 		virtual int getID() const { return m_id; }
 		virtual void setID(int id) { m_id = id; }
 

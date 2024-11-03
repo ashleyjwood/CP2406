@@ -10,5 +10,7 @@ namespace HR
 	public:
 		// Explicitly inherit Employee's constructors.
 		using Employee::Employee;
+
+		std::string toString() const override { return Employee::toString() + ", Manager"; }
 	};
 }
