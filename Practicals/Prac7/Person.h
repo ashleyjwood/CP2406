@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 
 namespace HR
 {
@@ -30,12 +31,12 @@ namespace HR
 
 		virtual std::string toString() const { return m_firstName + " " + m_initials + " " + m_lastName; }
 
-		virtual void output() const
+		virtual void output(std::ostream &out) const
 		{
-			std::cout << "Person Details:" << std::endl;
-			std::cout << "First Name: " << m_firstName << std::endl;
-			std::cout << "Last Name: " << m_lastName << std::endl;
-			std::cout << "Initials: " << m_initials << std::endl;
+			out << "Person Details:" << std::endl;
+			out << "First Name: " << m_firstName << std::endl;
+			out << "Last Name: " << m_lastName << std::endl;
+			out << "Initials: " << m_initials << std::endl;
 		}
 
 		virtual const std::string &getFirstName() const { return m_firstName; }
