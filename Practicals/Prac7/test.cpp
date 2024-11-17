@@ -1,3 +1,4 @@
+#include "Database.h"
 #include "Person.h"
 #include <memory>
 #include <vector>
@@ -7,32 +8,26 @@
 
 int main()
 {
-	std::vector<std::unique_ptr<HR::Person>> staff;
+    HR::Database db;
 
-	staff.push_back(std::make_unique<HR::Person>("Name", "LastName"));
-	staff.push_back(std::make_unique<HR::Person>("John", "Smith"));
+    // Add some persons to the database
+    db.add(std::make_unique<HR::Person>("John", "Doe", "JD"));
+    db.add(std::make_unique<HR::Person>("Jane", "Smith", "JS"));
 
-	for (const auto &person : staff)
-	{
-		person->output(std::cout);
-	}
+    // Output all persons to the console
+    std::cout << "Outputting all persons:" << std::endl;
+    db.outputAll(std::cout);
 
-	for (const auto &person : staff)
-	{
-		std::ostringstream output_stream;
-		person->output(output_stream);
-		std::cout << output_stream.str();
-	}
+    // Save the database to a file
+    db.save("people.txt");
 
-	std::ofstream file("person_output.txt");
-	if (file.is_open())
-	{
-		for (const auto &person : staff)
-		{
-			person->output(file);
-		}
-		file.close();
+    // Clear the database
+    db.clear();
 
-		std::cout << "Details written to file 'person_output.txt'" << std::endl;
-	}
+    // Load the database from the file
+    db.load("people.txt");
+
+    // Output all persons from the file
+    std::cout << "Outputting all persons after loading from file:" << std::endl;
+    db.outputAll(std::cout);
 }
