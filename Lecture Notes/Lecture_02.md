@@ -310,9 +310,7 @@ Notice that **this is not the same as setting `my_integer_pointer` to the value 
 If you were to reassign the pointer value, it would point to the memory address `8` which is probably random garbage
 that will eventually make your program crash.
 
-After you are finished with your dynamically allocated memory, you need to deallocate the memory using the `delete`
-operator. To prevent the pointer from being used after having deallocated the memory it points to, it's recommended to
-set it to `nullptr`:
+After you are finished with your dynamically allocated memory, you need to deallocate the memory using the `delete` operator. To prevent the pointer from being used after having deallocated the memory it points to, it's recommended to set it to `nullptr`:
 
 ```c++
 delete my_integer_pointer;
