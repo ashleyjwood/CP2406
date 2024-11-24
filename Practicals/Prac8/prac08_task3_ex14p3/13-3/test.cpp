@@ -1,32 +1,76 @@
-import person;
-import person_database;
-import <iostream>;
+#include "Database.h"
+#include <iostream>
+#include <exception>
 
 using namespace std;
 
 int main()
 {
-	// Fill a database.
-	Database db;
-	db.add(Person{ "John", "Doe" });
-	db.add(Person{ "Marc", "Gregoire", "Mg" });
-	db.add(Person{ "Peter", "Van Weert", "PVW" });
+    Database db;
 
-	// Output all persons in the database to standard output.
-	cout << "Initial database contents:" << endl;
-	db.outputAll(cout);
+    try
+    {
+        // Trigger 1: Attempt to save to a file without permissions
+        try
+        {
+            db.save("nonexistent_folder/person.db"); // Invalid directory
+        }
+        catch (const exception &e)
+        {
+            cerr << "Exception caught: " << e.what() << endl;
+        }
 
-	// Save the database to a file.
-	db.save("person.db");
+        // Trigger 2: Load a nonexistent file
+        try
+        {
+            db.load("nonexistent_file.db");
+        }
+        catch (const exception &e)
+        {
+            cerr << "Exception caught: " << e.what() << endl;
+        }
 
-	// Clear the database.
-	db.clear();
-	cout << "\nDatabase contents after clearing:" << endl;
-	db.outputAll(cout);
-	
-	// Load database from file.
-	cout << "\nLoading database from file..." << endl;
-	db.load("person.db");
-	cout << "\nDatabase contents after loading from file:" << endl;
-	db.outputAll(cout);
+        // Add some valid data
+        db.add(Person{"John", "Doe"});
+        db.add(Person{"Marc", "Gregoire", "MG"});
+
+        // Trigger 3: Save the database to a valid file
+        try
+        {
+            db.save("person.db");
+        }
+        catch (const exception &e)
+        {
+            cerr << "Exception caught: " << e.what() << endl;
+        }
+
+        // Clear the database
+        db.clear();
+
+        // Trigger 4: Output an empty database
+        try
+        {
+            db.outputAll(cout);
+        }
+        catch (const exception &e)
+        {
+            cerr << "Exception caught: " << e.what() << endl;
+        }
+
+        // Trigger 5: Load malformed data
+        try
+        {
+            db.load("malformed_person.db"); // Ensure the file has bad data for testing
+        }
+        catch (const exception &e)
+        {
+            cerr << "Exception caught: " << e.what() << endl;
+        }
+    }
+    catch (const exception &e)
+    {
+        cerr << "Unhandled exception: " << e.what() << endl;
+    }
+
+    return 0;
 }
