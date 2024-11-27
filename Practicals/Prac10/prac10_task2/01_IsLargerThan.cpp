@@ -1,55 +1,56 @@
-// import <vector>;
-// import <span>;
-// import <iostream>;
-// import <format>;
-// import <functional>;
 #include <vector>
 #include <iostream>
+#include <functional>
 
-
-using namespace std;
-
-template<typename Matcher, typename MatchHandler>
-void findMatches(
-	const vector<int> &values1, 
-	const vector<int> &values2,
-	Matcher matcher, MatchHandler handler)
+// Function to find matches between two vectors based on a matcher and handler
+template <typename Matcher, typename MatchHandler>
+void find_matches(const std::vector<int> &values1, const std::vector<int> &values2,
+				  Matcher matcher, MatchHandler handler)
 {
-	if (values1.size() != values2.size()) { return; } // Both vectors must be same size.
+	// Ensure both vectors have the same size
+	if (values1.size() != values2.size())
+	{
+		return;
+	}
 
-	for (size_t i{ 0 }; i < values1.size(); ++i) {
-		if (matcher(values1[i], values2[i])) {
+	// Iterate through the elements of both vectors
+	for (size_t i{0}; i < values1.size(); ++i)
+	{
+		if (matcher(values1[i], values2[i]))
+		{
 			handler(i, values1[i], values2[i]);
 		}
 	}
 }
 
-void printMatch(size_t position, int value1, int value2)
+// Function to print details about a match
+void print_match(size_t position, int value1, int value2)
 {
-	// cout << format("Match found at position {} ({}, {})",
-	// 	position, value1, value2) << endl;
-	cout << "Match found at position = " << position << std::endl;
-	cout << "value1 = "  << value1 << std::endl;
-	cout << "value2 = "  << value2 << std::endl;
+	std::cout << "Match found at position " << position
+			  << " (" << value1 << ", " << value2 << ")" << std::endl;
 }
-
-class IsLargerThan
-{
-public:
-	explicit IsLargerThan(int value) : m_value{ value } {}
-
-	bool operator()(int value1, int value2) const {
-		return value1 > m_value && value2 > m_value;
-	}
-
-private:
-	int m_value;
-};
 
 int main()
 {
-	vector values1{ 2, 500, 6, 9, 10, 101, 1 };
-	vector values2{ 4, 4, 2, 9, 0, 300, 1 };
+	std::vector<int> values1{2, 500, 6, 9, 10, 101, 1};
+	std::vector<int> values2{4, 4, 2, 9, 0, 300, 1};
 
-	findMatches(values1, values2, IsLargerThan{ 100 }, printMatch);
+	// Stateless Lambda: Threshold hardcoded as 100
+	auto stateless_matcher = [](int value1, int value2)
+	{
+		return value1 > 100 && value2 > 100;
+	};
+
+	std::cout << "Using stateless lambda:" << std::endl;
+	find_matches(values1, values2, stateless_matcher, print_match);
+	std::cout << std::endl;
+	// Stateful Lambda: Threshold passed as a variable
+	int threshold{100};
+	auto stateful_matcher = [threshold](int value1, int value2)
+	{
+		return value1 > threshold && value2 > threshold;
+	};
+
+	std::cout << "Using stateful lambda:" << std::endl;
+	find_matches(values1, values2, stateful_matcher, print_match);
 }
