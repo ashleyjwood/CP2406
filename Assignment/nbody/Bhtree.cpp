@@ -8,7 +8,8 @@
 #include "Octant.cpp"
 #include <random>
 
-class Bhtree {
+class Bhtree
+{
 private:
     body myBod;
     Octant octy;
@@ -23,7 +24,8 @@ private:
 
 public:
 #if 1
-    Bhtree(Octant &&o): octy(std::move(o)) {
+    Bhtree(Octant &&o) : octy(std::move(o))
+    {
         UNW = NULL;
         UNE = NULL;
         USW = NULL;
@@ -51,31 +53,45 @@ public:
 
     const Octant &octant() const { return octy; }
 
-    ~Bhtree() {
+    ~Bhtree()
+    {
         // check if each is ==0 (null)
-        if (UNW != NULL) delete UNW; //UNW->~Bhtree();
-        if (UNE != NULL) delete UNE; //UNE->~Bhtree();
-        if (USW != NULL) delete USW; //USW->~Bhtree();
-        if (USE != NULL) delete USE; //USE->~Bhtree();
-        if (DNW != NULL) delete DNW; //DNW->~Bhtree();
-        if (DNE != NULL) delete DNE; //DNE->~Bhtree();
-        if (DSW != NULL) delete DSW; //DSW->~Bhtree();
-        if (DSE != NULL) delete DSE; //DSE->~Bhtree();
+        if (UNW != NULL)
+            delete UNW; // UNW->~Bhtree();
+        if (UNE != NULL)
+            delete UNE; // UNE->~Bhtree();
+        if (USW != NULL)
+            delete USW; // USW->~Bhtree();
+        if (USE != NULL)
+            delete USE; // USE->~Bhtree();
+        if (DNW != NULL)
+            delete DNW; // DNW->~Bhtree();
+        if (DNE != NULL)
+            delete DNE; // DNE->~Bhtree();
+        if (DSW != NULL)
+            delete DSW; // DSW->~Bhtree();
+        if (DSE != NULL)
+            delete DSE; // DSE->~Bhtree();
     }
 
-    bool isExternal() {
+    bool isExternal()
+    {
         return UNW == NULL && UNE == NULL && USW == NULL && USE == NULL &&
                DNW == NULL && DNE == NULL && DSW == NULL && DSE == NULL;
     }
 
-    void insert(body *insertBod) {
-        if (myBod.mass == 0) {
+    void insert(body *insertBod)
+    {
+        if (myBod.mass == 0)
+        {
             myBod = *insertBod;
-        } else //if (!isExternal())
+        }
+        else // if (!isExternal())
         {
             bool isExtern = isExternal();
             body *updatedBod;
-            if (!isExtern) {
+            if (!isExtern)
+            {
                 myBod.position.x = (insertBod->position.x * insertBod->mass +
                                     myBod.position.x * myBod.mass) /
                                    (insertBod->mass + myBod.mass);
@@ -87,46 +103,93 @@ public:
                                    (insertBod->mass + myBod.mass);
                 myBod.mass += insertBod->mass;
                 updatedBod = insertBod;
-            } else {
+            }
+            else
+            {
                 updatedBod = &myBod;
             }
             Octant &&unw = octy.mUNW();
-            if (unw.contains(updatedBod->position)) {
-                if (UNW == NULL) { UNW = new Bhtree(std::move(unw)); }
+            if (unw.contains(updatedBod->position))
+            {
+                if (UNW == NULL)
+                {
+                    UNW = new Bhtree(std::move(unw));
+                }
                 UNW->insert(updatedBod);
-            } else {
+            }
+            else
+            {
                 Octant &&une = octy.mUNE();
-                if (une.contains(updatedBod->position)) {
-                    if (UNE == NULL) { UNE = new Bhtree(std::move(une)); }
+                if (une.contains(updatedBod->position))
+                {
+                    if (UNE == NULL)
+                    {
+                        UNE = new Bhtree(std::move(une));
+                    }
                     UNE->insert(updatedBod);
-                } else {
+                }
+                else
+                {
                     Octant &&usw = octy.mUSW();
-                    if (usw.contains(updatedBod->position)) {
-                        if (USW == NULL) { USW = new Bhtree(std::move(usw)); }
+                    if (usw.contains(updatedBod->position))
+                    {
+                        if (USW == NULL)
+                        {
+                            USW = new Bhtree(std::move(usw));
+                        }
                         USW->insert(updatedBod);
-                    } else {
+                    }
+                    else
+                    {
                         Octant &&use = octy.mUSE();
-                        if (use.contains(updatedBod->position)) {
-                            if (USE == NULL) { USE = new Bhtree(std::move(use)); }
+                        if (use.contains(updatedBod->position))
+                        {
+                            if (USE == NULL)
+                            {
+                                USE = new Bhtree(std::move(use));
+                            }
                             USE->insert(updatedBod);
-                        } else {
+                        }
+                        else
+                        {
                             Octant &&dnw = octy.mDNW();
-                            if (dnw.contains(updatedBod->position)) {
-                                if (DNW == NULL) { DNW = new Bhtree(std::move(dnw)); }
+                            if (dnw.contains(updatedBod->position))
+                            {
+                                if (DNW == NULL)
+                                {
+                                    DNW = new Bhtree(std::move(dnw));
+                                }
                                 DNW->insert(updatedBod);
-                            } else {
+                            }
+                            else
+                            {
                                 Octant &&dne = octy.mDNE();
-                                if (dne.contains(updatedBod->position)) {
-                                    if (DNE == NULL) { DNE = new Bhtree(std::move(dne)); }
+                                if (dne.contains(updatedBod->position))
+                                {
+                                    if (DNE == NULL)
+                                    {
+                                        DNE = new Bhtree(std::move(dne));
+                                    }
                                     DNE->insert(updatedBod);
-                                } else {
+                                }
+                                else
+                                {
                                     Octant &&dsw = octy.mDSW();
-                                    if (dsw.contains(updatedBod->position)) {
-                                        if (DSW == NULL) { DSW = new Bhtree(std::move(dsw)); }
+                                    if (dsw.contains(updatedBod->position))
+                                    {
+                                        if (DSW == NULL)
+                                        {
+                                            DSW = new Bhtree(std::move(dsw));
+                                        }
                                         DSW->insert(updatedBod);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         Octant &&dse = octy.mDSE();
-                                        if (DSE == NULL) { DSE = new Bhtree(std::move(dse)); }
+                                        if (DSE == NULL)
+                                        {
+                                            DSE = new Bhtree(std::move(dse));
+                                        }
                                         DSE->insert(updatedBod);
                                     }
                                 }
@@ -135,41 +198,75 @@ public:
                     }
                 }
             }
-            if (isExtern) {
+            if (isExtern)
+            {
                 insert(insertBod);
             }
         }
     }
 
-    double magnitude(vec3 *v) {
-        return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
+    double magnitude(vec3 *v)
+    {
+        return sqrt(pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2));
     }
 
-    double magnitude(double x, double y, double z) {
-        return sqrt(x * x + y * y + z * z);
+    double magnitude(double x, double y, double z)
+    {
+        return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
     }
 
-    void singleInteract(struct body *target, struct body *other) {
-        // complete this function
+    void singleInteract(struct body *target, struct body *other)
+    {
+        vec3 positive_difference;
+        positive_difference.x = (target->position.x - other->position.x) * AU_TO_METRES;
+        positive_difference.y = (target->position.y - other->position.y) * AU_TO_METRES;
+        positive_difference.z = (target->position.z - other->position.z) * AU_TO_METRES;
+
+        double distance = magnitude(positive_difference.x, positive_difference.y, positive_difference.z);
+
+        // Avoid dividing by zero in subsequent calculations
+        if (distance == 0)
+            return;
+
+        double force = TIME_STEP * (G * target->mass * other->mass) / ((pow(distance, 2) + pow(SOFTENING, 2)) * distance);
+
+        target->accel.x -= force * positive_difference.x / target->mass;
+        target->accel.y -= force * positive_difference.y / target->mass;
+        target->accel.z -= force * positive_difference.z / target->mass;
     }
 
-    void interactInTree(body *bod) {
-        if (isExternal()) {
+    void interactInTree(body *bod)
+    {
+        if (isExternal())
+        {
             singleInteract(bod, &myBod);
-        } else if (octy.getLength() /
-                   magnitude(myBod.position.x - bod->position.x,
-                             myBod.position.y - bod->position.y,
-                             myBod.position.z - bod->position.z) < MAX_DISTANCE) {
+        }
+        else if (octy.getLength() /
+                     magnitude(myBod.position.x - bod->position.x,
+                               myBod.position.y - bod->position.y,
+                               myBod.position.z - bod->position.z) <
+                 MAX_DISTANCE)
+        {
             singleInteract(bod, &myBod);
-        } else {
-            if (UNW != NULL) UNW->interactInTree(bod);
-            if (UNE != NULL) UNE->interactInTree(bod);
-            if (USW != NULL) USW->interactInTree(bod);
-            if (USE != NULL) USE->interactInTree(bod);
-            if (DNW != NULL) DNW->interactInTree(bod);
-            if (DNE != NULL) DNE->interactInTree(bod);
-            if (DSW != NULL) DSW->interactInTree(bod);
-            if (DSE != NULL) DSE->interactInTree(bod);
+        }
+        else
+        {
+            if (UNW != NULL)
+                UNW->interactInTree(bod);
+            if (UNE != NULL)
+                UNE->interactInTree(bod);
+            if (USW != NULL)
+                USW->interactInTree(bod);
+            if (USE != NULL)
+                USE->interactInTree(bod);
+            if (DNW != NULL)
+                DNW->interactInTree(bod);
+            if (DNE != NULL)
+                DNE->interactInTree(bod);
+            if (DSW != NULL)
+                DSW->interactInTree(bod);
+            if (DSE != NULL)
+                DSE->interactInTree(bod);
         }
     }
 };
